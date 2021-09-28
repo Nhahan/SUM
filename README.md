@@ -44,5 +44,5 @@
 ### ✅ DELETE /short-links/{short_id} 
 #### 숏링크 삭제
 ![image](https://user-images.githubusercontent.com/81916648/135054102-55a17d64-f67a-4410-9e45-08786a1cb89b.png)<br>
-URL has been deleted successfully.
+URL(shortId == YDDkd) has been deleted successfully.
 <br><br>
