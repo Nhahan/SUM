@@ -86,9 +86,13 @@ public class UrlService {
 
     @Transactional
     public void deleteShortId(String short_id) {
-        urlRepository.deleteByShortId(short_id);
+        Long count = urlRepository.deleteByShortId(short_id);
 
-        log.info(short_id + " has been deleted");
+        if (count > 0) {
+            log.info(short_id + " has been deleted");
+        } else {
+            throw new ApiRequestException("url not found");
+        }
     }
 
     public String getShortId() {
