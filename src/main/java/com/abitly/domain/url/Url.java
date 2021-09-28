@@ -1,20 +1,16 @@
 package com.abitly.domain.url;
 
-import com.abitly.domain.common.Timestamped;
-import com.abitly.dto.request.PostUrlRequestDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Getter
 @Entity
 @NoArgsConstructor
-public class Url extends Timestamped {
+public class Url {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,6 +18,12 @@ public class Url extends Timestamped {
     private String url;
     private String shortId;
     private String aliasName;
+    private LocalDateTime createdAt;
+
+    @PrePersist
+    public void createdAt() {
+        this.createdAt = LocalDateTime.now();
+    }
 
     @Builder
     public Url(String url, String shortId, String aliasName) {
