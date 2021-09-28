@@ -19,7 +19,4 @@ public class Url extends Timestamped {
     private String shortId;
     private String aliasName;
 
-
-
-
 }
