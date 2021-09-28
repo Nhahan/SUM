@@ -7,7 +7,6 @@ import com.abitly.dto.response.ShortLinkListResponseDto;
 import com.abitly.dto.response.UrlByShortIdResponseDto;
 import com.abitly.service.UrlService;
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
