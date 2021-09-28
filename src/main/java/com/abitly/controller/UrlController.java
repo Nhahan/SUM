@@ -7,7 +7,11 @@ import com.abitly.dto.response.ShortLinkListResponseDto;
 import com.abitly.dto.response.UrlByShortIdResponseDto;
 import com.abitly.service.UrlService;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 @RequiredArgsConstructor
 @RestController
@@ -36,15 +40,17 @@ public class UrlController {
     }
 
     @GetMapping("/r/{short_id}")
-    public String redirectWithShortId(@PathVariable String short_id) {
+    public void redirectWithShortId(HttpServletResponse httpServletResponse,
+                                    @PathVariable String short_id) throws IOException {
         String redirectedUrl = urlService.getRedirectedUrlWithShortId(short_id);
-        return "redirect:" + redirectedUrl;
+        httpServletResponse.sendRedirect(redirectedUrl);
     }
 
     @GetMapping("/a/{alias_name}")
-    public String redirectWithAliasName(@PathVariable String alias_name) {
+    public void redirectWithAliasName(HttpServletResponse httpServletResponse,
+                                      @PathVariable String alias_name) throws IOException {
         String redirectedUrl = urlService.getRedirectedUrlWithAliasName(alias_name);
-        return "redirect:" + redirectedUrl;
+        httpServletResponse.sendRedirect(redirectedUrl);
     }
 
     @DeleteMapping("/short-links/{short_id}")
