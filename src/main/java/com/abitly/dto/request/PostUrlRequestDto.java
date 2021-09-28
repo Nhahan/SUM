@@ -5,6 +5,6 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-public class postUrlRequestDto {
+public class PostUrlRequestDto {
     private String url;
 }

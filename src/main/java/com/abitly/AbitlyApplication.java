@@ -9,5 +9,4 @@ public class AbitlyApplication {
     public static void main(String[] args) {
         SpringApplication.run(AbitlyApplication.class, args);
     }
-
 }
