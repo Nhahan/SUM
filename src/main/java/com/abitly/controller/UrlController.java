@@ -14,7 +14,7 @@ public class UrlController {
 
     private final UrlService urlService;
 
-    @PostMapping
+    @PostMapping("/short-links")
     public PostUrlResponseDto postUrl(@RequestBody PostUrlRequestDto requestDto) {
         return urlService.postUrl(requestDto);
     }

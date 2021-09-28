@@ -53,14 +53,22 @@ public class UrlService {
 
     private String createShortId() {
         final int URL_LENGTH = 5;
-        final int START_a = 97;
-        final int END_z = 123;
 
         Random random = new Random();
 
-        return random.ints(START_a, END_z)
-                .limit(URL_LENGTH)
-                .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
-                .toString();
+        StringBuilder randomUrl = new StringBuilder();
+        for (int i = 0; i < URL_LENGTH; i++) {
+            int choice = random.nextInt(2);
+            switch (choice) {
+                case 0:
+                    randomUrl.append((char) (random.nextInt(25) + 97));
+                    break;
+                case 1:
+                    randomUrl.append((char) (random.nextInt(25) + 65));
+                    break;
+            }
+        }
+
+        return randomUrl.toString();
     }
 }
