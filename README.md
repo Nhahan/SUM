@@ -16,20 +16,20 @@
 
 ### ✅ GET /short-links?size=3&page=1
 ![image](https://user-images.githubusercontent.com/81916648/135052610-e0176ec0-6aaf-41b4-9f7f-0f6a20dd1d28.png)
-<br>
+<br><br>
 
 ### ✅ GET /short-links/{short_id}
 ![image](https://user-images.githubusercontent.com/81916648/135052968-fcbbff35-11d7-4484-873b-491c055b348a.png)
-<br>
+<br><br>
 
 ### ✅ PATCH /short-links/{short_id}
 ![image](https://user-images.githubusercontent.com/81916648/135053832-e9c1f4c6-9f59-4eed-97d7-71e29c4b35a7.png)
-<br>
+<br><br>
 
 ### ✅ GET /a/{alias_name}
 302 redirect
 <br><br>
 
 ### ✅ DELETE /short-links/{short_id}
-![image](https://user-images.githubusercontent.com/81916648/135054102-55a17d64-f67a-4410-9e45-08786a1cb89b.png)
-URL has been deleted!
+![image](https://user-images.githubusercontent.com/81916648/135054102-55a17d64-f67a-4410-9e45-08786a1cb89b.png)<br>
+URL has been deleted successfully.
