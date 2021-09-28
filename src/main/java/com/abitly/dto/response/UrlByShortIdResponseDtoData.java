@@ -11,21 +11,21 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class UrlByShortIdResponseDtoData {
 
-    private String url;
+    private String aliasName;
     private String shortId;
     private LocalDateTime createdAt;
 
     @Builder
-    public UrlByShortIdResponseDtoData(String url, String shortId, LocalDateTime createdAt) {
-        this.url = url;
+    public UrlByShortIdResponseDtoData(String aliasName, String shortId, LocalDateTime createdAt) {
+        this.aliasName = aliasName;
         this.shortId = shortId;
         this.createdAt = createdAt;
     }
 
     public static UrlByShortIdResponseDtoData createUrlByShortIdResponseDtoData(Url url) {
         return UrlByShortIdResponseDtoData.builder()
-                .url(url.getUrl())
                 .shortId(url.getShortId())
+                .aliasName(url.getAliasName())
                 .createdAt(url.getCreatedAt())
                 .build();
     }

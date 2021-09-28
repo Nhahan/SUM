@@ -39,4 +39,8 @@ public class Url {
                 .aliasName(aliasName)
                 .build();
     }
+
+    public void updateAliasName(String aliasName) {
+        this.aliasName = aliasName;
+    }
 }

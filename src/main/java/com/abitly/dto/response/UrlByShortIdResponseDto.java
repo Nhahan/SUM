@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class UrlByShortIdResponseDto {
-    private UrlByShortIdResponseDto data;
+    private UrlByShortIdResponseDtoData data;
 
     @Builder
     public UrlByShortIdResponseDto(UrlByShortIdResponseDtoData data) {
