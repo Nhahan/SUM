@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UrlRepository extends JpaRepository<Url, Long> {
-    @Query("select u from Url u")
+    @Query("select u from Url u order by u.createdAt asc")
     List<Url> findAllPaging(PageRequest pageable);
 
     Optional<Url> findByShortId(String short_id);

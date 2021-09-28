@@ -60,8 +60,10 @@ public class UrlService {
     @Transactional
     public void patchAliasNameRequestDto(PatchAliasNameRequestDto requestDto, String short_id) {
         Url url = urlRepository.findByShortId(short_id).orElseThrow(() -> new ApiRequestException("url not found"));
-        urlRepository.findByAliasName(requestDto.getAliasName()).orElseThrow(
-                () -> new ApiRequestException("url already existed"));
+        if (urlRepository.findAll().stream()
+                .anyMatch(u -> u.getAliasName().equals(requestDto.getAliasName()))) {
+            throw new ApiRequestException("url already exist");
+        }
 
         url.updateAliasName(requestDto.getAliasName());
 
