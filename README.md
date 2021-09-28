@@ -1,4 +1,5 @@
 ## 📣 숏링크 생성
+<br>
 
 
 
@@ -28,6 +29,10 @@
 
 ### ✅ PATCH /short-links/{short_id} 
 #### 숏링크의 별명(사용자지정 이름) 설정
+- Request
+![image](https://user-images.githubusercontent.com/81916648/135058075-e9ba09f6-3099-48ad-8635-85b413f445f8.png)
+
+- Result
 ![image](https://user-images.githubusercontent.com/81916648/135053832-e9c1f4c6-9f59-4eed-97d7-71e29c4b35a7.png)
 <br><br>
 
