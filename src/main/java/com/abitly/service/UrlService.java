@@ -61,13 +61,17 @@ public class UrlService {
     public void patchAliasNameRequestDto(PatchAliasNameRequestDto requestDto, String short_id) {
         Url url = urlRepository.findByShortId(short_id).orElseThrow(() -> new ApiRequestException("url not found"));
         if (urlRepository.findAll().stream()
-                .anyMatch(u -> u.getAliasName().equals(requestDto.getAliasName()))) {
+                .anyMatch(u -> patchAliasNameRequestDtoException(u, requestDto.getAliasName()))) {
             throw new ApiRequestException("url already exist");
         }
 
         url.updateAliasName(requestDto.getAliasName());
 
         log.info(short_id + " has been patched with " + requestDto.getAliasName());
+    }
+
+    public boolean patchAliasNameRequestDtoException(Url url, String aliasName) {
+        return url.getAliasName().equals(aliasName) || url.getUrl().equals(aliasName);
     }
 
     public String getRedirectedUrlWithAliasName(String alias_name) {
