@@ -1,6 +1,7 @@
 package com.abitly.controller;
 
 import com.abitly.dto.request.PostUrlRequestDto;
+import com.abitly.dto.response.PostUrlResponseDto;
 import com.abitly.service.UrlService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,7 +15,7 @@ public class UrlController {
     private final UrlService urlService;
 
     @PostMapping
-    public void postUrl(@RequestBody PostUrlRequestDto requestDto) {
-        urlService.postUrl(requestDto);
+    public PostUrlResponseDto postUrl(@RequestBody PostUrlRequestDto requestDto) {
+        return urlService.postUrl(requestDto);
     }
 }
