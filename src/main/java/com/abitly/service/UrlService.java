@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static com.abitly.domain.url.Url.createUrl;
 import static com.abitly.dto.response.PostUrlResponseDto.createPostUrlResponseDto;
@@ -98,7 +99,8 @@ public class UrlService {
     public String getShortId() {
         List<String> urlList = urlRepository.findAll()
                 .stream()
-                .map(Url::getUrl)
+                .flatMap(u -> Stream.of(u.getShortId(), u.getAliasName()))
+                .distinct()
                 .collect(Collectors.toList());
 
         while (true) {
