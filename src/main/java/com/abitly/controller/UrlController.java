@@ -18,6 +18,11 @@ public class UrlController {
 
     private final UrlService urlService;
 
+    @GetMapping("/u/{url}")
+    public String getUrl(@PathVariable String url) {
+        return urlService.getUrl(url);
+    }
+
     @PostMapping("/short-links")
     public PostUrlResponseDto postUrl(@RequestBody PostUrlRequestDto requestDto) {
         return urlService.postUrl(requestDto);
@@ -38,7 +43,7 @@ public class UrlController {
         urlService.patchAliasNameRequestDto(requestDto, short_id);
     }
 
-    @GetMapping("/r/{short_id}")
+    @GetMapping("/s/{short_id}")
     public void redirectWithShortId(HttpServletResponse httpServletResponse,
                                     @PathVariable String short_id) throws IOException {
         String redirectedUrl = urlService.getRedirectedUrlWithShortId(short_id);

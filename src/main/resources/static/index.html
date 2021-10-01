@@ -19,8 +19,28 @@
             crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="/css/style.css">
 
-    <script>
-
+    <script th:inline="javascript" type="text/javascript">
+        function postUrl() {
+            let url = $('#text-input').val();
+            $.ajax({
+                type: "POST",
+                url: "/short-links",
+                contentType: "application/json",
+                data: JSON.stringify(url),
+                success: function () {
+                    console.log(url)
+                }
+            });
+            $.ajax({
+                type: "GET",
+                url: `/short-links/${url}`,
+                success: function (response) {
+                    console.log(response)
+                    console.log(response["data"]["shortId"])
+                }
+            });
+            console.log("finished")
+        }
     </script>
 
     <style>
@@ -59,11 +79,14 @@
 
         <div class=input-box-wrapper>
             <div class="input-group mb-3">
+                <form class="form-class">
                 <input type="text" class="form-control" placeholder="Short Url Maker" aria-label="url-input"
-                       aria-describedby="basic-addon2">
+                       aria-describedby="basic-addon2" id="text-input">
                 <div class="input-group-append">
-                    <button class="input-group-text" id="basic-addon2">URL 생성!</button>
+                    <button type="button" class="input-group-text" id="basic-addon2" onclick="postUrl()">URL 생성!
+                    </button>
                 </div>
+                </form>
             </div>
         </div>
     </div>

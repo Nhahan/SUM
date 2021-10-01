@@ -17,5 +17,5 @@ public interface UrlRepository extends JpaRepository<Url, Long> {
 
     Long deleteByShortId(String short_id);
 
-    Boolean existsByShortId(String shortId);
+    Optional<Url> findByUrl(String url);
 }

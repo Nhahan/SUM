@@ -135,4 +135,9 @@ public class UrlService {
 
         return randomUrl.toString();
     }
+
+    public String getUrl(String url) {
+        Url foundUrl = urlRepository.findByUrl(url).orElseThrow(() -> new ApiRequestException("url not found"));
+        return foundUrl.getUrl();
+    }
 }
