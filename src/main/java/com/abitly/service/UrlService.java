@@ -36,7 +36,7 @@ public class UrlService {
     public PostUrlResponseDto postUrl(PostUrlRequestDto requestDto) {
         String shortId = getShortId();
 
-        Url url = urlRepository.findByShortId(shortId).orElseGet(
+        Url url = urlRepository.findByUrl(requestDto.getUrl()).orElseGet(
                 () -> urlRepository.save(createUrl(requestDto.getUrl(), shortId, shortId)));
 
         if (url.getCreatedAt().isAfter(LocalDateTime.now().minusSeconds(1))) {
