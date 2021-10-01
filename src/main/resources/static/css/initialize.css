@@ -421,3 +421,24 @@ td,
 th {
     padding: 0;
 }
+
+.centered {
+    width: 480px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header-wrapper {
+    width: 100%;
+}
+
+.input-box-wrapper {
+    width: 100%
+}
+
+.logo-box {
+    width: 380px;
+    height: 200px;
+}
