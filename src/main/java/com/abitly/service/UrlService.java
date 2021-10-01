@@ -12,6 +12,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -35,8 +36,13 @@ public class UrlService {
     public PostUrlResponseDto postUrl(PostUrlRequestDto requestDto) {
         String shortId = getShortId();
 
+
         Url url = urlRepository.findByShortId(shortId).orElseGet(
                 () -> urlRepository.save(createUrl(requestDto.getUrl(), shortId, shortId)));
+
+        if (url.getCreatedAt().isEqual(LocalDateTime.now())) {
+            log.info(requestDto.getUrl() + " posted as " + shortId);
+        }
 
         PostUrlResponseDtoData data = createPostUrlResponseDtoData(url);
 
