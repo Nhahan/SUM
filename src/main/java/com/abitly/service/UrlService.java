@@ -34,10 +34,9 @@ public class UrlService {
     @Transactional
     public PostUrlResponseDto postUrl(PostUrlRequestDto requestDto) {
         String shortId = getShortId();
-        Url url = createUrl(requestDto.getUrl(), shortId, shortId);
-        urlRepository.save(url);
 
-        log.info(requestDto.getUrl() + " posted as " + shortId);
+        Url url = urlRepository.findByShortId(shortId).orElseGet(
+                () -> urlRepository.save(createUrl(requestDto.getUrl(), shortId, shortId)));
 
         PostUrlResponseDtoData data = createPostUrlResponseDtoData(url);
 
