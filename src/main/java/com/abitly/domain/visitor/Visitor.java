@@ -1,47 +1,36 @@
 package com.abitly.domain.visitor;
 
-import com.abitly.domain.url.Url;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Getter
 @Entity
+@Document
 @NoArgsConstructor
 public class Visitor {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long urlId;
-    private String url;
-    private String shortId;
-    private String aliasName;
+    private String visitorId;
+    private String ipAddress;
     private LocalDateTime createdAt;
 
-    @PrePersist
     public void createdAt() {
         this.createdAt = LocalDateTime.now();
     }
 
     @Builder
-    public Visitor(String url, String shortId, String aliasName) {
-        this.url = url;
-        this.shortId = shortId;
-        this.aliasName = aliasName;
+    public Visitor(String ipAddress) {
+        this.ipAddress = ipAddress;
     }
 
-    public static Url createUrl(String url, String shortId, String aliasName) {
-        return Url.builder()
-                .url(url)
-                .shortId(shortId)
-                .aliasName(aliasName)
+    public static Visitor createVisitor(String ipAddress) {
+        return Visitor.builder()
+                .ipAddress(ipAddress)
                 .build();
-    }
-
-    public void updateAliasName(String aliasName) {
-        this.aliasName = aliasName;
     }
 }
