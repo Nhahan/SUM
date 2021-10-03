@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @Entity
-@Document
+@Document(collection = "visitor")
 @NoArgsConstructor
 public class Visitor {
 

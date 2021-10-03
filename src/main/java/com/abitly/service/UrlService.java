@@ -138,6 +138,6 @@ public class UrlService {
 
     public String getUrl(String url) {
         Url foundUrl = urlRepository.findByUrl(url).orElseThrow(() -> new ApiRequestException("url not found"));
-        return "suml.xyz/" + foundUrl.getShortId();
+        return "suml.xyz/s/" + foundUrl.getShortId();
     }
 }

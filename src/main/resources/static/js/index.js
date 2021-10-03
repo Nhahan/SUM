@@ -8,10 +8,12 @@ function postUrl() {
         url: "/short-links",
         contentType: "application/json",
         data: JSON.stringify(url),
-    });
+    })
+
+    console.log(url)
 }
 
-function createUrl() {
+function checkUrl() {
     if (url !== "") {
         $.ajax({
             type: "GET",
