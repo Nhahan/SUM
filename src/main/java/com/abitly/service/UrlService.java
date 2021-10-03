@@ -2,6 +2,8 @@ package com.abitly.service;
 
 import com.abitly.domain.url.Url;
 import com.abitly.domain.url.UrlRepository;
+import com.abitly.domain.visitor.Visitor;
+import com.abitly.domain.visitor.VisitorRepository;
 import com.abitly.dto.request.PatchAliasNameRequestDto;
 import com.abitly.dto.request.PostUrlRequestDto;
 import com.abitly.dto.response.*;
@@ -11,7 +13,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Random;
@@ -31,6 +36,7 @@ import static com.abitly.dto.response.UrlByShortIdResponseDtoData.createUrlBySho
 public class UrlService {
 
     private final UrlRepository urlRepository;
+    private final VisitorRepository visitorRepository;
 
     @Transactional
     public PostUrlResponseDto postUrl(PostUrlRequestDto requestDto) {
@@ -45,7 +51,25 @@ public class UrlService {
 
         PostUrlResponseDtoData data = createPostUrlResponseDtoData(url);
 
+        VisitorIpChecker();
+
         return createPostUrlResponseDto(data);
+    }
+
+    private void VisitorIpChecker() {
+        HttpServletRequest req = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
+        String ipAddress = req.getHeader("X-FORWARDED-FOR");
+        if (ipAddress == null)
+            ipAddress = req.getRemoteAddr();
+
+        Visitor visitor = Visitor.createVisitor(ipAddress);
+        visitorRepository.save(visitor);
+
+        Long visitorCounts = visitorRepository.countByIpAddress(ipAddress);
+
+        if (visitorCounts >= 6L) {
+            throw new ApiRequestException("too many requests");
+        }
     }
 
     public ShortLinkListResponseDto getShortLinkList(int size, int page) {
