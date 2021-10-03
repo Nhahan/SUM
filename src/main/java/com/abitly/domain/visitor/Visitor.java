@@ -3,6 +3,8 @@ package com.abitly.domain.visitor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.data.mongodb.core.index.IndexDirection;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.*;
@@ -16,12 +18,12 @@ public class Visitor {
 
     @Id
     private String visitorId;
-    private String ipAddress;
-    private LocalDateTime createdAt;
 
-    public void createdAt() {
-        this.createdAt = LocalDateTime.now();
-    }
+    @Indexed(name = "ipAddress", direction = IndexDirection.DESCENDING)
+    private String ipAddress;
+
+    @Indexed(name = "expire_after_seconds_index", expireAfterSeconds = 300)
+    private LocalDateTime dateOfBirth;
 
     @Builder
     public Visitor(String ipAddress) {
